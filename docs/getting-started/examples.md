@@ -16,6 +16,10 @@ examples/
   sample_scval.b64          # a valid base64-encoded ScVal for `sdkt decode`
 ```
 
+`sample_token` is intentionally a source-only fixture, not a buildable Cargo
+project. It has no `Cargo.toml`; run `sdkt audit` against the Rust source file
+directly instead of trying to compile the directory.
+
 Build `sdkt` first, then run the deterministic smoke test (no network, no
 secrets):
 
