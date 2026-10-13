@@ -925,7 +925,7 @@ enum CacheAction {
         /// Cached WASM SHA-256 hash (64 lowercase hexadecimal characters).
         #[arg(value_name = "HASH")]
         hash: String,
-        #[arg(short, long, default_value = "testnet")][
+        #[arg(short, long, default_value = "testnet")]
         network: String,
     },
     /// Clear all items in the cache for the network
