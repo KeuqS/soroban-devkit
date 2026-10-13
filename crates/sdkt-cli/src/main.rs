@@ -207,6 +207,8 @@ enum Commands {
     },
     /// Inspect a contract's ABI and storage
     Inspect {
+        /// Stellar contract ID in StrKey format (C...).
+        #[arg(value_name = "CONTRACT_ID")]
         contract_id: String,
         #[arg(short, long, default_value = "pretty")]
         format: String,
@@ -283,6 +285,8 @@ enum Commands {
     },
     /// Event explorer
     Events {
+        /// Stellar contract ID in StrKey format (C...).
+        #[arg(value_name = "CONTRACT_ID")]
         contract_id: String,
         #[arg(short, long, default_value = "pretty")]
         format: String,
@@ -308,6 +312,8 @@ enum Commands {
     },
     /// Inspect an account's balances and signers
     Account {
+        /// Stellar account address in StrKey format (G...).
+        #[arg(value_name = "ADDRESS")]
         address: String,
         #[arg(short, long, default_value = "pretty")]
         format: String,
@@ -734,15 +740,21 @@ enum IdentityAction {
     },
     /// Show a single identity by name
     Show {
+        /// Saved identity name.
+        #[arg(value_name = "NAME")]
         name: String,
         /// Output format (pretty or json)
         #[arg(short, long, default_value = "pretty")]
         format: String,
     },
     Delete {
+        /// Saved identity name to remove.
+        #[arg(value_name = "NAME")]
         name: String,
     },
     Default {
+        /// Saved identity name to use as the default.
+        #[arg(value_name = "NAME")]
         name: String,
     },
     /// Fund an identity via the Stellar Testnet Friendbot.
@@ -778,6 +790,8 @@ enum PluginAction {
     },
     /// Show metadata for an installed plugin
     Show {
+        /// Installed plugin ID.
+        #[arg(value_name = "ID")]
         id: String,
         /// Output format (pretty or json)
         #[arg(short, long, default_value = "pretty")]
@@ -804,6 +818,8 @@ enum PluginAction {
     },
     /// Remove an installed plugin by id (idempotent)
     Remove {
+        /// Installed plugin ID to remove.
+        #[arg(value_name = "ID")]
         id: String,
         /// Output format (pretty or json)
         #[arg(short, long, default_value = "pretty")]
@@ -906,8 +922,10 @@ enum CacheAction {
     },
     /// Remove a specific hash from the cache
     Remove {
+        /// Cached WASM SHA-256 hash (64 lowercase hexadecimal characters).
+        #[arg(value_name = "HASH")]
         hash: String,
-        #[arg(short, long, default_value = "testnet")]
+        #[arg(short, long, default_value = "testnet")][
         network: String,
     },
     /// Clear all items in the cache for the network
@@ -1162,6 +1180,8 @@ enum PackageCommand {
 #[derive(Subcommand)]
 enum StorageAction {
     Check {
+        /// Stellar contract ID in StrKey format (C...).
+        #[arg(value_name = "CONTRACT_ID")]
         contract_id: String,
         #[arg(short, long, default_value = "pretty")]
         format: String,
@@ -1178,6 +1198,7 @@ enum StorageAction {
     /// `sdkt storage analyze`.
     Estimate {
         /// Path to the compiled contract WASM file.
+        #[arg(value_name = "WASM")]
         wasm: String,
         /// Number of ledgers to estimate extension cost for (default: 17280, ~1 day at 5s/ledger).
         #[arg(short, long, default_value = "17280")]
@@ -1190,6 +1211,8 @@ enum StorageAction {
     /// categorization, TTL summary, and per-entry detail).
     #[command(alias = "snapshot")]
     Analyze {
+        /// Stellar contract ID in StrKey format (C...).
+        #[arg(value_name = "CONTRACT_ID")]
         contract_id: String,
         /// Repeatable: extra ledger keys (base64 XDR or hex XDR) to include in
         /// the analysis. The contract instance key is always included.
